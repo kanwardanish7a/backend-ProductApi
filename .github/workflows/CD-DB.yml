@@ -1,4 +1,4 @@
-name: SQL Server Database Deployment
+name: Deploy Database
 
 on:
   push:
@@ -8,18 +8,19 @@ on:
 jobs:
   deploy-db:
     runs-on: ubuntu-latest
+    environment: production # This will trigger manual approval from the 'production' environment
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v3
+      uses: actions/checkout@v2
 
-    - name: Set up .NET
-      uses: actions/setup-dotnet@v3
-      with:
-        dotnet-version: '8.0'  # Ensure you're using the correct .NET version
-
-    - name: Run EF Migrations
+    - name: Set up SQL Server or Database service
       run: |
-        # Run EF migrations to update the database schema
-        dotnet ef database update --configuration Release --project ./YourDbProject/YourDbProject.csproj
-        # If you're not using EF, you can add steps to execute raw .sql scripts
+        # Set up your database deployment steps here (e.g., execute SQL scripts or use other tools)
+        echo "Deploying Database..."
+
+    - name: Deploy database scripts
+      run: |
+        # Example script to deploy database
+        # Replace with your specific SQL deployment command
+        echo "Running database deployment..."
