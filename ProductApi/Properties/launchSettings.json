@@ -1,0 +1,24 @@
+﻿{
+  "iisSettings": {
+    "windowsAuthentication": false,
+    "anonymousAuthentication": true,
+    "iisExpress": {
+      "sslPort": 44300
+    }
+  },
+  "profiles": {
+    "IIS Express": {
+      "environmentVariables": [],
+      "commandName": "IISExpress",
+      "sslPort": 5001
+    },
+    "http": {
+      "commandName": "Project",
+      "url": "http://localhost:5000"
+    },
+    "https": {
+      "commandName": "Project",
+      "url": "https://localhost:5001"
+    }
+  }
+}
