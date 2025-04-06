@@ -3,7 +3,7 @@ name: SQL Server Database Deployment
 on:
   push:
     branches:
-      - main
+      - master
 
 jobs:
   deploy-db:
