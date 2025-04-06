@@ -1,0 +1,37 @@
+name: .NET Core CI/CD Deployment
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: '8.0'  # Ensure you're using the correct .NET version
+
+    - name: Restore dependencies
+      run: dotnet restore
+
+    - name: Build the app
+      run: dotnet build --configuration Release
+
+    - name: Publish the app
+      run: dotnet publish --configuration Release --output ./publish
+
+    - name: Deploy .NET Backend to VM or Local (IIS)
+      run: |
+        # Use SSH to copy the publish folder to the target VM or local machine
+        scp -r ./publish/* your-username@your-vm-ip:/path/to/your/iis-site/
+        # Or use PowerShell if deploying to a Windows machine with IIS
+        # Invoke-Command -ScriptBlock {Copy-Item -Path './publish/*' -Destination 'C:\inetpub\wwwroot\your-backend-app-folder\' -Recurse}
+        # After copying, you may need to restart IIS to pick up changes
+        # Invoke-Command -ScriptBlock {iisreset}

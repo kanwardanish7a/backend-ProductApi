@@ -1,0 +1,25 @@
+name: SQL Server Database Deployment
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy-db:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: '8.0'  # Ensure you're using the correct .NET version
+
+    - name: Run EF Migrations
+      run: |
+        # Run EF migrations to update the database schema
+        dotnet ef database update --configuration Release --project ./YourDbProject/YourDbProject.csproj
+        # If you're not using EF, you can add steps to execute raw .sql scripts
